@@ -15,14 +15,18 @@ def download_video():
     link = ent.get("1.0", "end")
     path = os.path.expanduser('~') + '\Downloads'
     pb['value'] = 30
-    a = YouTube(link)
-    pb['value'] = 50
-    a = a.streams.first()
-    pb['value'] = 70
-    a.download(path)
-    pb['value'] = 100
-    lbl2.place(x=145,y=125)
-    lbl2.configure(text='Загрузка видео завершена')
+    try:
+        a = YouTube(link)
+        pb['value'] = 50
+        a = a.streams.first()
+        pb['value'] = 70
+        a.download(path)
+        pb['value'] = 100
+        lbl2.place(x=145,y=125)
+        lbl2.configure(text='Загрузка видео завершена')
+    except Exception:
+        lbl2.place(x=50,y=125)
+        lbl2.configure(text='Возникла ошибка на сервере или такого видео не существует')
 
 
 root = Tk()
